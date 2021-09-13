@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import thunk from 'thunk';
+import thunk from 'redux-thunk';
 const initialState = {
     post: [],
 };
@@ -7,12 +7,12 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'GET_POST':
-            return { ...state, post: action.payload };
+            return { ...state, post: action.payload.post };
         default:
             return state;
     }
 };
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk));
 
 export default store;
